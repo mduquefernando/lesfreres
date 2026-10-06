@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Les Frères — creative studio selected work." />
+  <meta name="theme-color" content="#f7f7f4" />
+  <title>Les Frères — Selected Work</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=5" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a class="wordmark" href="#" aria-label="Les Frères, home">LES FRÈRES</a>
+    <p class="studio-line" aria-hidden="true"></p>
+    <button class="sound-toggle" id="sound-toggle" type="button" aria-pressed="true">
+      <span class="sound-dot" aria-hidden="true"></span>
+      Sound on
+    </button>
+  </header>
+
+  <main>
+    <section class="hero" aria-label="Selected work">
+      <div class="scene-wrap" id="scene-wrap">
+        <div class="scene" id="scene" aria-label="Interactive selected work carousel">
+          <div class="ring" id="ring"></div>
+        </div>
+        <div class="orbit-line" aria-hidden="true"></div>
+      </div>
+
+      <div class="hero-bottom">
+        <div class="contact-block">
+          <p>Contact</p>
+          <a href="mailto:lesfreresagency@gmail.com">lesfreresagency@gmail.com</a>
+        </div>
+        <div class="active-meta" aria-live="polite">
+          <p class="active-count"><span id="active-index">01</span> / <span id="total-count">17</span></p>
+          <p class="active-title" id="active-title">Hugo Boss</p>
+          <p class="active-role" id="active-role">Direction · Editing</p>
+          <p class="active-action">Click to view</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© <span id="year"></span> Les Frères</p>
+  </footer>
+
+  <dialog class="viewer" id="viewer" aria-labelledby="viewer-title">
+    <div class="viewer-bar">
+      <div>
+        <p class="viewer-index" id="viewer-index">01 / 17</p>
+        <h2 id="viewer-title">Project</h2>
+        <p class="viewer-role" id="viewer-role" hidden></p>
+      </div>
+      <button class="viewer-close" id="viewer-close" type="button" aria-label="Close project">Close <span>×</span></button>
+    </div>
+    <div class="viewer-media">
+      <video id="viewer-video" controls playsinline preload="metadata"></video>
+      <p class="media-error" id="media-error" role="status">This film could not be loaded.</p>
+    </div>
+    <div class="viewer-nav">
+      <button id="viewer-prev" type="button">← Previous</button>
+      <button id="viewer-next" type="button">Next →</button>
+    </div>
+  </dialog>
+
+  <noscript>This portfolio needs JavaScript to display the interactive work carousel.</noscript>
+  <script src="app.js?v=5"></script>
+</body>
+</html>
