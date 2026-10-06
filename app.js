@@ -7,7 +7,7 @@ const projects = [
   { title: "G-Shock", role: "Direction · Cinematography · Editing", file: "G-shock.mp4" },
   { title: "Orkin", role: "AI Cinematography", file: "Orkin (ia cinematography).mp4" },
   { title: "Orkin II", role: "AI Cinematography", file: "Orkin II (ia cinematography).mp4" },
-  { title: "Niba", role: "Direction", file: "Niba (direction).mp4" },
+  { title: "Niba", role: "Direction", file: "Niba (direction).mp4", poster: "Niba poster.jpg" },
   { title: "L0RNA — 2.0", role: "Editing", file: "l0rna - 2.0 (edit).mp4" },
   { title: "L0RNA — Quien Se Lo Queda Pierde", role: "Editing", file: "l0rna -Quien Se Lo Queda Pierde (edit) .mp4" },
   { title: "Yung Beef — Plugg3", role: "Editing · AI Cinematography", file: "YungBeef Plugg3 (edit + ai cinematography).mp4" },
@@ -64,7 +64,7 @@ projects.forEach((project, index) => {
   button.setAttribute("aria-label", `Open ${project.title}`);
   button.innerHTML = `
     <span class="project-card">
-      <video muted playsinline preload="metadata" tabindex="-1" aria-hidden="true">
+      <video muted playsinline preload="metadata" tabindex="-1" aria-hidden="true"${project.poster ? ` poster="${mediaUrl(project.poster)}"` : ""}>
         <source src="${mediaUrl(project.file)}" type="video/mp4">
       </video>
     </span>
@@ -82,7 +82,7 @@ const thumbVideos = [...ring.querySelectorAll("video")];
 
 thumbVideos.forEach((video, index) => {
   video.addEventListener("loadeddata", () => {
-    if (video.duration > .2) video.currentTime = Math.min(.35 + (index % 4) * .12, video.duration / 3);
+    if (video.duration > .2 && !projects[index].poster) video.currentTime = Math.min(.35 + (index % 4) * .12, video.duration / 3);
   }, { once: true });
 });
 
