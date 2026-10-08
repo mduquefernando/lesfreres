@@ -1,21 +1,21 @@
 const projects = [
-  { title: "Hugo Boss", role: "Direction · Editing", file: "Hugo Boss (direction + edit).mp4" },
-  { title: "Carolina Herrera I", role: "Direction", file: "Carolina Herrera(direction).mp4" },
-  { title: "Carolina Herrera II", role: "Direction", file: "Carolina Herrea (direction).mp4" },
-  { title: "Nike × FCB", role: "Editing · AI Cinematography", file: "Nike x FCB (edit + ai cinematography).mp4" },
-  { title: "Aperol Spritz", role: "Editing · AI VFX", file: "Aperol Spritz (edit + ai vfx).mp4" },
-  { title: "G-Shock", role: "Direction · Cinematography · Editing", file: "G-shock.mp4" },
-  { title: "Orkin", role: "AI Cinematography", file: "Orkin (ia cinematography).mp4" },
-  { title: "Orkin II", role: "AI Cinematography", file: "Orkin II (ia cinematography).mp4" },
+  { title: "Hugo Boss", role: "Direction · Editing", file: "Hugo Boss (direction + edit).mp4", poster: "Hugo Boss (direction + edit).jpg" },
+  { title: "Carolina Herrera I", role: "Direction", file: "Carolina Herrera(direction).mp4", poster: "Carolina Herrera(direction).jpg" },
+  { title: "Carolina Herrera II", role: "Direction", file: "Carolina Herrea (direction).mp4", poster: "Carolina Herrea (direction).jpg" },
+  { title: "Nike × FCB", role: "Editing · AI Cinematography", file: "Nike x FCB (edit + ai cinematography).mp4", poster: "Nike x FCB (edit + ai cinematography).jpg" },
+  { title: "Aperol Spritz", role: "Editing · AI VFX", file: "Aperol Spritz (edit + ai vfx).mp4", poster: "Aperol Spritz (edit + ai vfx).jpg" },
+  { title: "G-Shock", role: "Direction · Cinematography · Editing", file: "G-shock.mp4", poster: "G-shock.jpg" },
+  { title: "Orkin", role: "AI Cinematography", file: "Orkin (ia cinematography).mp4", poster: "Orkin (ia cinematography).jpg" },
+  { title: "Orkin II", role: "AI Cinematography", file: "Orkin II (ia cinematography).mp4", poster: "Orkin II (ia cinematography).jpg" },
   { title: "Niba", role: "Direction", file: "Niba (direction).mp4", poster: "Niba poster.jpg" },
-  { title: "L0RNA — 2.0", role: "Editing", file: "l0rna - 2.0 (edit).mp4" },
-  { title: "L0RNA — Quien Se Lo Queda Pierde", role: "Editing", file: "l0rna -Quien Se Lo Queda Pierde (edit) .mp4" },
-  { title: "Yung Beef — Plugg3", role: "Editing · AI Cinematography", file: "YungBeef Plugg3 (edit + ai cinematography).mp4" },
-  { title: "Say Hello", role: "Direction · Cinematography · Editing", file: "Say hello .mp4" },
-  { title: "TLS I", role: "Direction · Cinematography · Editing", file: "TLS I.mp4" },
-  { title: "TLS II", role: "Direction · Cinematography · Editing", file: "TLS II.mp4" },
-  { title: "TLS III", role: "Direction · Cinematography · Editing", file: "TLS III.mp4" },
-  { title: "TLS IV", role: "Direction · Cinematography · Editing", file: "TLS IV.mp4" }
+  { title: "L0RNA — 2.0", role: "Editing", file: "l0rna - 2.0 (edit).mp4", poster: "l0rna - 2.0 (edit).jpg" },
+  { title: "L0RNA — Quien Se Lo Queda Pierde", role: "Editing", file: "l0rna -Quien Se Lo Queda Pierde (edit) .mp4", poster: "l0rna -Quien Se Lo Queda Pierde (edit) .jpg" },
+  { title: "Yung Beef — Plugg3", role: "Editing · AI Cinematography", file: "YungBeef Plugg3 (edit + ai cinematography).mp4", poster: "YungBeef Plugg3 (edit + ai cinematography).jpg" },
+  { title: "Say Hello", role: "Direction · Cinematography · Editing", file: "Say hello .mp4", poster: "Say hello .jpg" },
+  { title: "TLS I", role: "Direction · Cinematography · Editing", file: "TLS I.mp4", poster: "TLS I.jpg" },
+  { title: "TLS II", role: "Direction · Cinematography · Editing", file: "TLS II.mp4", poster: "TLS II.jpg" },
+  { title: "TLS III", role: "Direction · Cinematography · Editing", file: "TLS III.mp4", poster: "TLS III.jpg" },
+  { title: "TLS IV", role: "Direction · Cinematography · Editing", file: "TLS IV.mp4", poster: "TLS IV.jpg" }
 ];
 
 const ring = document.querySelector("#ring");
