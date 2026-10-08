@@ -51,6 +51,7 @@ let lastPointerTime = 0;
 let pressedProject = null;
 let soundEnabled = true;
 let audioContext = null;
+let carouselConfig = getCarouselConfig();
 
 totalCountEl.textContent = pad(projects.length);
 setRole(activeRoleEl, projects[0].role);
@@ -103,8 +104,12 @@ function updateActive() {
   projectEls.forEach((el, index) => {
     const angularDistance = Math.abs(shortestAngle(index * step + rotation));
     el.classList.toggle("is-active", index === next);
-    el.classList.toggle("is-front", angularDistance < 82);
-    el.style.opacity = String(clamp(1 - angularDistance / 270, .3, 1));
+    el.classList.toggle("is-front", angularDistance < carouselConfig.frontAngle);
+    const visible = angularDistance <= carouselConfig.visibleAngle;
+    el.style.opacity = visible
+      ? String(clamp(1 - angularDistance / carouselConfig.fadeDistance, carouselConfig.minOpacity, 1))
+      : "0";
+    el.style.pointerEvents = visible ? "auto" : "none";
   });
   if (next === activeIndex) return;
   activeIndex = next;
@@ -137,10 +142,14 @@ sceneWrap.addEventListener("pointermove", (event) => {
   }
   const delta = event.clientX - pointerStartX;
   if (Math.abs(delta) > 5) moved = true;
-  targetRotation = rotationStart + delta * .24;
+  targetRotation = rotationStart + delta * carouselConfig.dragSensitivity;
   const now = performance.now();
   const elapsed = Math.max(8, now - lastPointerTime);
-  velocity = ((event.clientX - lastPointerX) / elapsed) * 10;
+  velocity = clamp(
+    ((event.clientX - lastPointerX) / elapsed) * carouselConfig.velocityScale,
+    -carouselConfig.maxVelocity,
+    carouselConfig.maxVelocity
+  );
   lastPointerX = event.clientX;
   lastPointerTime = now;
 });
@@ -172,7 +181,7 @@ sceneWrap.addEventListener("wheel", (event) => {
   event.preventDefault();
   ensureAudio();
   const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
-  targetRotation -= clamp(delta, -75, 75) * .12;
+  targetRotation -= clamp(delta, -75, 75) * carouselConfig.wheelSensitivity;
   velocity = 0;
 }, { passive: false });
 
@@ -278,10 +287,65 @@ function setRole(element, role) {
   element.hidden = !role;
 }
 function updateRingRadius() {
+  carouselConfig = getCarouselConfig();
   const cardWidth = scene.getBoundingClientRect().width;
-  const gap = clamp(cardWidth * .08, 8, 16);
-  const radius = (cardWidth + gap) / (2 * Math.tan(Math.PI / projects.length));
+  const gap = clamp(cardWidth * carouselConfig.gapRatio, carouselConfig.minGap, carouselConfig.maxGap);
+  const geometricRadius = (cardWidth + gap) / (2 * Math.tan(Math.PI / projects.length));
+  const radius = clamp(geometricRadius, carouselConfig.minRadius, carouselConfig.maxRadius);
   document.documentElement.style.setProperty("--radius", `${Math.round(radius)}px`);
+}
+
+function getCarouselConfig() {
+  const width = window.innerWidth;
+  if (width <= 700) {
+    return {
+      dragSensitivity: .17,
+      velocityScale: 7.2,
+      maxVelocity: .85,
+      wheelSensitivity: .085,
+      frontAngle: 48,
+      visibleAngle: 180,
+      fadeDistance: 270,
+      minOpacity: .16,
+      gapRatio: .045,
+      minGap: 5,
+      maxGap: 8,
+      minRadius: 220,
+      maxRadius: clamp(width * .62, 220, 258)
+    };
+  }
+  if (width <= 1024) {
+    return {
+      dragSensitivity: .2,
+      velocityScale: 8.4,
+      maxVelocity: 1.25,
+      wheelSensitivity: .1,
+      frontAngle: 68,
+      visibleAngle: 180,
+      fadeDistance: 270,
+      minOpacity: .22,
+      gapRatio: .065,
+      minGap: 7,
+      maxGap: 12,
+      minRadius: 300,
+      maxRadius: Math.min(430, width * .46)
+    };
+  }
+  return {
+    dragSensitivity: .24,
+    velocityScale: 10,
+    maxVelocity: Number.POSITIVE_INFINITY,
+    wheelSensitivity: .12,
+    frontAngle: 82,
+    visibleAngle: 180,
+    fadeDistance: 270,
+    minOpacity: .3,
+    gapRatio: .08,
+    minGap: 8,
+    maxGap: 16,
+    minRadius: 0,
+    maxRadius: Number.POSITIVE_INFINITY
+  };
 }
 function mod(value, divisor) { return ((value % divisor) + divisor) % divisor; }
 function clamp(value, min, max) { return Math.min(max, Math.max(min, value)); }
